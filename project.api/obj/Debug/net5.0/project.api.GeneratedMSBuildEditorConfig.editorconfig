@@ -7,4 +7,4 @@ build_property.PublishSingleFile =
 build_property.IncludeAllContentForSelfExtract = 
 build_property._SupportedPlatformList = Android,iOS,Linux,macOS,Windows
 build_property.RootNamespace = project.api
-build_property.ProjectDir = /home/eric/Desktop/ITQ-project/project.api/
+build_property.ProjectDir = /home/eric/Desktop/ITQ-project/ITQ/project.api/

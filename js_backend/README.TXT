@@ -1,0 +1,1 @@
+npm start    -->> from terminal on js_backend

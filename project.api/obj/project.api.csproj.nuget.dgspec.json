@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/eric/Desktop/ITQ-project/project.api/project.api.csproj": {}
+    "/home/eric/Desktop/ITQ-project/ITQ/project.api/project.api.csproj": {}
   },
   "projects": {
-    "/home/eric/Desktop/ITQ-project/project.api/project.api.csproj": {
+    "/home/eric/Desktop/ITQ-project/ITQ/project.api/project.api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/eric/Desktop/ITQ-project/project.api/project.api.csproj",
+        "projectUniqueName": "/home/eric/Desktop/ITQ-project/ITQ/project.api/project.api.csproj",
         "projectName": "project.api",
-        "projectPath": "/home/eric/Desktop/ITQ-project/project.api/project.api.csproj",
+        "projectPath": "/home/eric/Desktop/ITQ-project/ITQ/project.api/project.api.csproj",
         "packagesPath": "/home/eric/.nuget/packages/",
-        "outputPath": "/home/eric/Desktop/ITQ-project/project.api/obj/",
+        "outputPath": "/home/eric/Desktop/ITQ-project/ITQ/project.api/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/eric/.nuget/NuGet/NuGet.Config"
@@ -38,9 +38,31 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "Microsoft.EntityFrameworkCore.Design": {
+              "target": "Package",
+              "version": "[5.0.9, )"
+            },
             "Microsoft.EntityFrameworkCore.InMemory": {
               "target": "Package",
               "version": "[5.0.9, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[5.0.9, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.9, )"
+            },
+            "MySql.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.5, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.1, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",

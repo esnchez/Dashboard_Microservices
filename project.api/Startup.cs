@@ -11,6 +11,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json.Serialization;
+using project.api.Models;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace project.api
 {
@@ -25,7 +29,16 @@ namespace project.api
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {
+        {   
+
+            services.AddDbContext<EmployeeContext>(options => options.UseMySQL(Configuration.GetConnectionString("Default")));
+            //enableCORS
+            services.AddCors(C => {
+                C.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            });
+            
+            //JSON Serializer
+            //services.AddControllersWithViews().AddNewtonsoftJson( options => op)
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -37,6 +50,8 @@ namespace project.api
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
