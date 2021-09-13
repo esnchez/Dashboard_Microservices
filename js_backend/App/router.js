@@ -104,6 +104,11 @@ router.post("/api/employees/create", (req, res) => {
     DBEmployees.createEmployee(req, res);
 });
 
+router.post("/api/employees/create/pivot", (req, res) => {
+    DBEmployees.createEmployeePivot(req, res);
+});
+
+
 
 //Teams
 

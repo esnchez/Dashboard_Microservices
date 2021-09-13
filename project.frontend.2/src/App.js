@@ -1,9 +1,9 @@
 import './App.css';
-import Companies2 from './components/Companies2'
 import Employees from './components/Employees';
 import Teams from './components/Teams';
 import EmployeeForm from './components/EmployeeForm';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
+import CompaniesList from './components/CompaniesList';
 
 
 
@@ -16,7 +16,7 @@ function App() {
         COMPANIES LIST
         </p> 
         
-        <Companies2/>
+        <CompaniesList/>
         {/* <Teams/> */}
         {/* {<Employees/>} */}
 

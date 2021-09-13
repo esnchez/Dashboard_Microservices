@@ -154,6 +154,20 @@ class Employee {
         );
     }
 
+    createEmployeePivot(req, res) {
+        const create = true;
+        const teamId = req.body.TeamId;
+        const employeeId = req.body.EmployeeId;
+        
+        db.query(
+            `INSERT INTO teams_employees (TeamId, EmployeeId) VALUES ("${teamId}","${employeeId}")`
+            , (err, result) => {
+  
+                this.queryResult(err, result, res, create);
+            }
+        );
+    }
+
     
 
     loginUser(req, res) {
