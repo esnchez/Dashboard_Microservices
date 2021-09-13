@@ -31,9 +31,34 @@ function Employees(props) {
             )
     }, [])
 
+    const postEmployee = (employee) => {
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(employee)
+            // { Name: firstName, Surname: lastName, DNI: dni, Salary: salary}
+        };
+        console.log(requestOptions.body)
+        fetch('http://localhost:3000/api/employees/create', requestOptions)
+            .then(response => response.json())
+        
+    }
+
     const pulsar = () => {
         setShowForm(!showForm)
     }
+
+    const addEmployee = (employee) => {
+        if (!employee.Name || !employee.Surname || !employee.DNI || !employee.Salary) {
+          return;
+        }    
+    
+        //send to insert api
+        postEmployee(employee)
+        const newEmployeesArray = [employee, ...employees];
+    
+        setEmployees(newEmployeesArray);
+      };
 
 
 
@@ -69,7 +94,7 @@ function Employees(props) {
 
 
             <div>
-                {showForm && <EmployeeForm />
+                {showForm && <EmployeeForm onSubmit={addEmployee} />
                 }
             </div>
         </div>

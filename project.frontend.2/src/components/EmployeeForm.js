@@ -1,24 +1,40 @@
 import React ,{  useState, useEffect } from 'react'
 import { Button, Form } from 'semantic-ui-react'
 
-function EmployeeForm(){
+function EmployeeForm(props){
 
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [dni, setDNI] = useState('');
     const [salary, setSalary] = useState('');
 
-    const postData = () => {
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ Name: firstName, Surname: lastName, DNI: dni, Salary: salary})
-        };
-        console.log(requestOptions.body)
-        fetch('http://localhost:3000/api/employees/create', requestOptions)
-            .then(response => response.json())
+    // const postData = () => {
+    //     const requestOptions = {
+    //         method: 'POST',
+    //         headers: { 'Content-Type': 'application/json' },
+    //         body: JSON.stringify({ Name: firstName, Surname: lastName, DNI: dni, Salary: salary})
+    //     };
+    //     console.log(requestOptions.body)
+    //     fetch('http://localhost:3000/api/employees/create', requestOptions)
+    //         .then(response => response.json())
         
-    }
+    // }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+    
+        props.onSubmit({
+          Name: firstName,
+          Surname: lastName,
+          DNI: dni,
+          Salary: salary,
+        });
+
+        setFirstName("");
+        setLastName("");
+        setDNI("");
+        setSalary("");
+      };
     
     //useEffect(() => {
         // POST request using fetch inside useEffect React hook
@@ -55,7 +71,8 @@ function EmployeeForm(){
     //   }, [])
 
     return(
-    <Form>
+        
+    <Form onSubmit={handleSubmit}>
     <Form.Field>
         <label>First Name</label>
         <input placeholder='First Name' onChange={(e) => setFirstName(e.target.value)}/>
@@ -72,7 +89,7 @@ function EmployeeForm(){
         <input placeholder='Salary' onChange={(e) => setSalary(e.target.value)} />
     </Form.Field>
     
-    <Button type='submit' onClick={postData} >Submit</Button>
+    <Button type='submit' onClick={handleSubmit} >Submit</Button>
 </Form>
     )
 }

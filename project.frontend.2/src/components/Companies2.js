@@ -26,9 +26,6 @@ export default function Companies2() {
       .then(
         (result) => {
           setIsLoaded(true);
-          console.log(result.data)
-          setHeaders(Object.keys(result.data[0]))
-
           setItems(result.data);
         },
         // Nota: es importante manejar errores aquí y no en 
@@ -43,10 +40,9 @@ export default function Companies2() {
 
 
   const pulsar = (id) => {
-    setId(id)
-    console.log(trigger)
-    setTrigger(true)
-    console.log("after", trigger)
+    // setId(id)
+    console.log(id)
+    // console.log("after", trigger)
 
   }
 
@@ -74,7 +70,7 @@ export default function Companies2() {
                 <td>{item.Sector}</td>
                 <td>{item.City}</td>
                 <td>
-                  <button onClick ={() => pulsar()}>
+                  <button onClick ={() => pulsar(item.CompanyId)}>
                   <i class="eye icon"></i>
                   </button>
                 </td>
@@ -84,20 +80,9 @@ export default function Companies2() {
         </Table>
       </div>
     )
-    // <ul>
-    //   {
-    //     items.map(item => (
-    //       <li key={item.CompanyId}>
-    //         <button onClick={() =>
-    //           pulsar(item.CompanyId)}>
-    //           {item.Name}
-    //         </button>
-
-    //       </li>
-    //     ))}
-
+    
     {/* {trigger && <Teams id={this.props.id}/>} */ }
-    // </ul>
+   
 
   }
 }
