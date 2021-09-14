@@ -28,7 +28,7 @@ export default function Teams(props) {
     }, [props.teams,props.teams.length,employees.length])
 
     const fetchEmployees = (id) => {
-        return fetch(`http://localhost:3000/api/teams/${id}`)
+        return fetch(process.env.REACT_APP_API_TEAMS+id)
                     .then(res => res.json())
                     .then(
                         (result) => {

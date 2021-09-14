@@ -18,7 +18,7 @@ export default function CompaniesList() {
   // this useEffect will run once
   // similar to componentDidMount()
   useEffect(() => {
-    fetch("http://localhost:3000/api/companies")
+    fetch(process.env.REACT_APP_API_COMPANIES)
       .then(res => res.json())
       .then(
         (result) => {
@@ -42,7 +42,7 @@ export default function CompaniesList() {
   }
 
   const fetchTeams = (id) => {
-    return fetch(`http://localhost:3000/api/companies/${id}`)
+    return fetch(process.env.REACT_APP_API_COMPANIES+id)
       .then(res => res.json())
       .then(
         (result) => {
@@ -95,13 +95,7 @@ export default function CompaniesList() {
         </div>}
 
       </div>
-
-
-
     )
-
-
   }
-
 }
 

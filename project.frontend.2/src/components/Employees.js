@@ -34,7 +34,7 @@ function Employees(props) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(employee)
         };
-        fetch('http://localhost:3000/api/employees/create', requestOptions)
+        fetch(process.env.REACT_APP_API_POST_EMPLOYEE, requestOptions)
             .then(response => response.json())
             .then(response => postEmployeeToTeam(response.data.insertId))
     }
@@ -45,7 +45,7 @@ function Employees(props) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ TeamId: teamId, EmployeeId: employeeId })
         };
-        fetch('http://localhost:3000/api/employees/create/pivot', requestOptions)
+        fetch(process.env.REACT_APP_API_POST_PIVOT, requestOptions)
             .then(response => response.json())
     }
 
