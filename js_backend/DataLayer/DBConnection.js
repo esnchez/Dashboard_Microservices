@@ -10,7 +10,7 @@ const db = mysql.createConnection({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
     password: process.env.DB_PASS,
-    database: process.env.DB_DATABASE //Name of the database, not the table.
+    database: process.env.DB_DATABASE //Name of the database
 });
 
 //THEN EXPORT THE DB CONNECTION

@@ -1,12 +1,8 @@
 const db = require("./DBConnection");
 
 class Company {
-    constructor() {
-    }
+    constructor() { }
 
-    //CREATE THE FUNCTIONS
-
-    //report the error and prevent crashing my server. SUPER IMPORTANT 
     queryResult(err, result, res, create) {
         //200 OK, 201 Created, 403 Forbidden, 500 Internal Server Error, 400 Bad Request
         let a = 200;
@@ -27,20 +23,10 @@ class Company {
     }
 
     getCompanies(req, res) {
-        if (req.params.id !== undefined) { //Get one company
-            db.query(
-                `select * from companies where id=${req.params.id}`, (err, result) => {
-                    this.queryResult(err, result, res);
-                }
-            );
-        }
-        else { //Get all companies
-            db.query(
-                "select * from companies", (err, result) => {
-                    this.queryResult(err, result, res);
-                }
-            );
-        }
+        db.query("select * from companies", (err, result) => {
+                this.queryResult(err, result, res);
+            }
+        );
     }
 
     getCompanyTeams(req, res) {
@@ -48,11 +34,6 @@ class Company {
             this.queryResult(err, result, res);
         })
     }
-
-
-
-
-
 }
 
 module.exports = Company;
