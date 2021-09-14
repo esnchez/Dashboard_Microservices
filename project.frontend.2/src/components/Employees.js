@@ -63,7 +63,10 @@ export default function Employees() {
         postEmployee(employee)
 
         //Update front-end with new employee
-        const newEmployeesArray = [employee, ...items];
+        console.log("array abans de afegir nou", items)
+        const newEmployeesArray = [...items, employee];
+        console.log("array despres de afegir nou", newEmployeesArray)
+
         setItems(newEmployeesArray);
     };
 
