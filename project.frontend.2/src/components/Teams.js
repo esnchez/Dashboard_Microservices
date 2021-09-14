@@ -6,7 +6,6 @@ import Employees from "./Employees";
 
 export default function Teams(props) {
     const [error, setError] = useState(null);
-    const [isLoaded, setIsLoaded] = useState(false);
 
     const [items, setItems] = useState([]);
     const [employees, setEmployees] = useState([]);
@@ -15,33 +14,27 @@ export default function Teams(props) {
 
 
     const [showTeams, setShowTeams] = useState(false);
-    const [showEmployees, setShowEmployees] = useState(false);
 
 
     useEffect(() => {
         setItems(props.teams)
 
-        console.log("emp ",employees)
         if (!props.teams.length == 0) {
             setShowTeams(true)
         }
         if (!employees.length == 0){
             setShowTeams(false)
         }
-
-    })
+    }, [props.teams,props.teams.length,employees.length])
 
     const fetchEmployees = (id) => {
         return fetch(`http://localhost:3000/api/teams/${id}`)
                     .then(res => res.json())
                     .then(
                         (result) => {
-                            // setIsLoaded(true);
                             setEmployees(result.data);
-                            // setShowTeams(true)
                         },
                         (error) => {
-                            //setIsLoaded(true);
                             setError(error);
                         })
       }
@@ -64,7 +57,7 @@ export default function Teams(props) {
     else {
         return (
             <div> {showTeams &&
-                <Table class="ui striped table">
+                <Table className="ui striped table">
                     <thead>
                         <tr>
                             <th>Name</th>
@@ -72,14 +65,14 @@ export default function Teams(props) {
                             <th>Employees</th>
                         </tr>
                     </thead>
-                    <tbody> {
+                    <tbody>{
                         items.map(item => (
-                            <tr key={item.TeamId} class="center aligned">
+                            <tr key={item.TeamId} className="center aligned">
                                 <td>{item.Name}</td>
                                 <td>{item.Type}</td>
                                 <td >
                                     <button onClick={() => pulsar(item.TeamId)}>
-                                        <i class="eye icon"></i>
+                                        <i className="eye icon"></i>
                                     </button>
                                 </td>
                             </tr>

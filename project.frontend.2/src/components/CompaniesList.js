@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Companies from "./Companies";
 import { Table } from 'semantic-ui-react'
-
 import Teams from "./Teams"
 
 
@@ -14,10 +12,6 @@ export default function CompaniesList() {
 
 
   const [hideCompanies, setHideCompanies] = useState(true);
-
-  const [companyId, setCompanyId] = useState(null);
-
-
 
 
   // Note: the empty deps array [] means
@@ -42,26 +36,21 @@ export default function CompaniesList() {
   }, [])
 
 
-  const pulsar = (id) => {
-    setCompanyId(id)
+  const trigger = (id) => {
     setHideCompanies(!hideCompanies)
     fetchTeams(id)
-    
   }
 
   const fetchTeams = (id) => {
     return fetch(`http://localhost:3000/api/companies/${id}`)
-                .then(res => res.json())
-                .then(
-                    (result) => {
-                        // setIsLoaded(true);
-                        setTeams(result.data);
-                        // setShowTeams(true)
-                    },
-                    (error) => {
-                        //setIsLoaded(true);
-                        setError(error);
-                    })
+      .then(res => res.json())
+      .then(
+        (result) => {
+          setTeams(result.data);
+        },
+        (error) => {
+          setError(error);
+        })
   }
 
   if (error) {
@@ -74,7 +63,7 @@ export default function CompaniesList() {
       <div>
         {hideCompanies &&
 
-          <Table class="ui striped table">
+          <Table className="ui striped table">
             <thead>
               <tr >
                 <th>Company Name</th>
@@ -83,15 +72,15 @@ export default function CompaniesList() {
                 <th>Teams</th>
               </tr>
             </thead>
-            <tbody> {
+            <tbody>{
               items.map(item => (
-                <tr key={item.CompanyId} class="center aligned">
+                <tr key={item.CompanyId} className="center aligned">
                   <td>{item.Name}</td>
                   <td>{item.Sector}</td>
                   <td>{item.City}</td>
                   <td>
-                    <button onClick={() => pulsar(item.CompanyId)}>
-                      <i class="eye icon"></i>
+                    <button onClick={() => trigger(item.CompanyId)}>
+                      <i className="eye icon"></i>
                     </button>
                   </td>
                 </tr>
@@ -102,7 +91,7 @@ export default function CompaniesList() {
         }
 
         {<div>
-          {<Teams teams={teams}/>}
+          {<Teams teams={teams} />}
         </div>}
 
       </div>

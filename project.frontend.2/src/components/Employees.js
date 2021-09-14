@@ -6,9 +6,7 @@ import { Table, Button } from 'semantic-ui-react'
 
 function Employees(props) {
 
-    const [error, setError] = useState(null);
 
-    // const [employees, setEmployees] = useState([]);
     const [items, setItems] = useState([]);
     const [teamId, setTeamId] = useState(null);
 
@@ -17,19 +15,15 @@ function Employees(props) {
     const [showForm, setShowForm] = useState(false);
 
 
-    //const teamId = this.props.teamId
-
     useEffect(() => {
         setTeamId(props.teamId)
-        if(items.length == 0){
+        if (items.length == 0) {
             setItems(props.employees)
         }
         if (!props.employees.length == 0) {
             setShowEmployees(true)
         }
-
-
-    })
+    },[props.teamId,items.length,props.employees,props.employees.length])
 
     const postEmployee = (employee) => {
         const requestOptions = {
@@ -37,12 +31,11 @@ function Employees(props) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(employee)
         };
-        console.log(requestOptions.body)
         fetch('http://localhost:3000/api/employees/create', requestOptions)
             .then(response => response.json())
             .then(response => postEmployeeToTeam(response.data.insertId))
     }
-    
+
     const postEmployeeToTeam = (employeeId) => {
         const requestOptions = {
             method: 'POST',
@@ -51,7 +44,6 @@ function Employees(props) {
         };
         fetch('http://localhost:3000/api/employees/create/pivot', requestOptions)
             .then(response => response.json())
-        console.log("emplos " ,props.employees)
     }
 
     const pulsar = () => {
@@ -77,7 +69,7 @@ function Employees(props) {
             {showEmployees &&
 
                 <div>
-                    <Table class="ui striped table">
+                    <Table className="ui striped table">
                         <thead>
                             <tr>
                                 <th>Name</th>
@@ -86,9 +78,9 @@ function Employees(props) {
                                 <th>Salary (€/year)</th>
                             </tr>
                         </thead>
-                        <tbody> {
+                        <tbody>{
                             items.map(item => (
-                                <tr key={item.EmployeeId} class="center aligned">
+                                <tr key={item.EmployeeId} className="center aligned">
                                     <td>{item.Name}</td>
                                     <td>{item.Surname}</td>
                                     <td>{item.DNI}</td>
@@ -99,23 +91,20 @@ function Employees(props) {
                     </Table>
 
                     <div >
-                        <Button class="ui button" tabindex="0" onClick={pulsar}>
+                        <Button className="ui button" tabIndex="0" onClick={pulsar}>
                             Add Employee
                         </Button>
                     </div>
 
                 </div>
             }
-            <p>
-                <div>
-                    {showForm && <EmployeeForm onSubmit={addEmployee} />
-                    }
-                </div>
-            </p>
 
+            <div>
+                {showForm && <EmployeeForm onSubmit={addEmployee} />
+                }
+            </div>
 
         </div>
-
 
     )
 }
