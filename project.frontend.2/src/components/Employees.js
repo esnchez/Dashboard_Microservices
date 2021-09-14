@@ -25,6 +25,9 @@ function Employees(props) {
         }
     },[props.teamId,items.length,props.employees,props.employees.length])
 
+
+    //API Post Calls to DB, tables employees and teams_employees
+
     const postEmployee = (employee) => {
         const requestOptions = {
             method: 'POST',
@@ -46,7 +49,9 @@ function Employees(props) {
             .then(response => response.json())
     }
 
-    const pulsar = () => {
+    ///
+
+    const trigger = () => {
         setShowForm(!showForm)
     }
 
@@ -55,10 +60,11 @@ function Employees(props) {
             return;
         }
 
-        //send to insert api
+        //send to API (above)
         postEmployee(employee)
-        const newEmployeesArray = [employee, ...items];
 
+        //Update front-end with new employee
+        const newEmployeesArray = [employee, ...items];
         setItems(newEmployeesArray);
     };
 
@@ -91,7 +97,7 @@ function Employees(props) {
                     </Table>
 
                     <div >
-                        <Button className="ui button" tabIndex="0" onClick={pulsar}>
+                        <Button className="ui button" tabIndex="0" onClick={trigger}>
                             Add Employee
                         </Button>
                     </div>

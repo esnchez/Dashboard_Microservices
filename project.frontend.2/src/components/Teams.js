@@ -42,7 +42,7 @@ export default function Teams(props) {
 
 
 
-    const pulsar = (id) => {
+    const trigger = (id) => {
         setShowTeams(!showTeams)
         fetchEmployees(id)
         setTeamId(id)
@@ -52,8 +52,6 @@ export default function Teams(props) {
     if (error) {
         return <div>Error: {error.message}</div>;
     }
-    // else if (!isLoaded) {
-    // return <div>Loading...</div>;}
     else {
         return (
             <div> {showTeams &&
@@ -71,7 +69,7 @@ export default function Teams(props) {
                                 <td>{item.Name}</td>
                                 <td>{item.Type}</td>
                                 <td >
-                                    <button onClick={() => pulsar(item.TeamId)}>
+                                    <button onClick={() => trigger(item.TeamId)}>
                                         <i className="eye icon"></i>
                                     </button>
                                 </td>
