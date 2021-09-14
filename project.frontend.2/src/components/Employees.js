@@ -76,7 +76,7 @@ export default function Employees() {
         <div>
             <Table className="ui striped table">
                 <thead>
-                    <tr>
+                    <tr className="center aligned">
                         <th>Name</th>
                         <th>Last Name</th>
                         <th>DNI</th>

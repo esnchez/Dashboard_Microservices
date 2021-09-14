@@ -27,7 +27,7 @@ export default function CompaniesList() {
     <div>
         <Table className="ui striped table">
           <thead>
-            <tr >
+            <tr className="center aligned" >
               <th>Company Name</th>
               <th>Sector</th>
               <th>City </th>

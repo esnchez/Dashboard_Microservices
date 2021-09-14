@@ -31,7 +31,7 @@ function EmployeeForm(props) {
 
     return (
 
-        <Form onSubmit={handleSubmit}>
+        <Form className="form" onSubmit={handleSubmit}>
             <Form.Field>
                 <label>First Name</label>
                 <input placeholder='First Name' onChange={(e) => setFirstName(e.target.value)} value={firstName} />

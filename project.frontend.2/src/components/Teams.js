@@ -24,7 +24,7 @@ export default function Teams() {
         <div>
             <Table className="ui striped table">
                 <thead>
-                    <tr>
+                    <tr className="center aligned">
                         <th>Name</th>
                         <th>Type</th>
                         <th>Employees</th>
