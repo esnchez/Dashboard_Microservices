@@ -1,21 +1,39 @@
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import './App.css';
 
 import CompaniesList from './components/CompaniesList';
+import Teams from './components/Teams';
+import Employees from './components/Employees';
+
 
 
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>
-        COMPANIES DASHBOARD
-        </h1> 
+    <Router>
+      <div className="App">
 
-        <CompaniesList/>
-      </header>
-    </div> 
-    
+        <header className="App-header">
+          <h1>
+            COMPANIES DASHBOARD
+          </h1>
+        </header>
+
+        <Switch>
+          <Route path="/companies/teams/:id" >
+            <Employees/>
+          </Route>
+          <Route path="/companies/:id" >
+            <Teams />
+          </Route>
+          <Route path="/companies" exact >
+            <CompaniesList />
+          </Route>
+          <Redirect exact from="/" to="/companies" />
+        </Switch>
+
+      </div>
+    </Router>
   );
 }
 

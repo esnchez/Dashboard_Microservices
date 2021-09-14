@@ -1,66 +1,65 @@
 import React, { useEffect, useState } from "react";
+import { useParams, Link } from 'react-router-dom';
+
 import EmployeeForm from "./EmployeeForm";
 import { Table, Button } from 'semantic-ui-react'
 
 
 
-function Employees(props) {
+export default function Employees() {
 
 
     const [items, setItems] = useState([]);
-    const [teamId, setTeamId] = useState(null);
-
-
-    const [showEmployees, setShowEmployees] = useState(false);
     const [showForm, setShowForm] = useState(false);
 
 
+    const { id } = useParams()
+
     useEffect(() => {
-        setTeamId(props.teamId)
-        if (items.length == 0) {
-            setItems(props.employees)
-        }
-        if (!props.employees.length == 0) {
-            setShowEmployees(true)
-        }
-    },[props.teamId,items.length,props.employees,props.employees.length])
+        getEmployees()
+    }, [])
 
+    //API CALLS ///////////////
+    const getEmployees = async () => {
+        const data = await fetch(process.env.REACT_APP_API_TEAMS + id)
+        const response = await data.json()
+        setItems(response.data)
+    }
 
-    //API Post Calls to DB, tables employees and teams_employees
-
-    const postEmployee = (employee) => {
+    const postEmployee = async (employee) => {
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(employee)
         };
-        fetch(process.env.REACT_APP_API_POST_EMPLOYEE, requestOptions)
-            .then(response => response.json())
-            .then(response => postEmployeeToTeam(response.data.insertId))
+        const data = await fetch(process.env.REACT_APP_API_POST_EMPLOYEE, requestOptions)
+        const response = await data.json()
+
+        postEmployeeToTeam(response.data.insertId)
     }
 
-    const postEmployeeToTeam = (employeeId) => {
+    const postEmployeeToTeam = async (employeeId) => {
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ TeamId: teamId, EmployeeId: employeeId })
+            body: JSON.stringify({ TeamId: id, EmployeeId: employeeId })
         };
-        fetch(process.env.REACT_APP_API_POST_PIVOT, requestOptions)
-            .then(response => response.json())
+        const data = await fetch(process.env.REACT_APP_API_POST_PIVOT, requestOptions)
+        const response = await data.json()
     }
 
-    ///
-
-    const trigger = () => {
+    ///Open close the form to add new employees
+    const openCloseForm = () => {
         setShowForm(!showForm)
     }
+
+    //Add the employee to list using the form 
 
     const addEmployee = (employee) => {
         if (!employee.Name || !employee.Surname || !employee.DNI || !employee.Salary) {
             return;
         }
-
-        //send to API (above)
+        //Post to API (above)
         postEmployee(employee)
 
         //Update front-end with new employee
@@ -72,41 +71,35 @@ function Employees(props) {
 
     return (
         <div>
-            {showEmployees &&
+            <Table className="ui striped table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Last Name</th>
+                        <th>DNI</th>
+                        <th>Salary (€/year)</th>
+                    </tr>
+                </thead>
+                <tbody>{
+                    items.map(item => (
+                        <tr key={item.EmployeeId} className="center aligned">
+                            <td>{item.Name}</td>
+                            <td>{item.Surname}</td>
+                            <td>{item.DNI}</td>
+                            <td>{item.Salary}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </Table>
 
-                <div>
-                    <Table className="ui striped table">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Last Name</th>
-                                <th>DNI</th>
-                                <th>Salary (€/year)</th>
-                            </tr>
-                        </thead>
-                        <tbody>{
-                            items.map(item => (
-                                <tr key={item.EmployeeId} className="center aligned">
-                                    <td>{item.Name}</td>
-                                    <td>{item.Surname}</td>
-                                    <td>{item.DNI}</td>
-                                    <td>{item.Salary}</td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </Table>
-
-                    <div >
-                        <Button className="ui button" tabIndex="0" onClick={trigger}>
-                            Add Employee
-                        </Button>
-                    </div>
-
-                </div>
-            }
+            <div >
+                <Button className="ui button" tabIndex="0" onClick={openCloseForm}>
+                    Add Employee
+                </Button>
+            </div>
 
             <div>
-                {showForm && <EmployeeForm onSubmit={addEmployee} />
+                { showForm && <EmployeeForm onSubmit={addEmployee} />
                 }
             </div>
 
@@ -114,5 +107,3 @@ function Employees(props) {
 
     )
 }
-
-export default Employees

@@ -1,101 +1,55 @@
 import React, { useEffect, useState } from "react";
+import { Link } from 'react-router-dom';
+
 import { Table } from 'semantic-ui-react'
-import Teams from "./Teams"
 
 
 export default function CompaniesList() {
-  const [error, setError] = useState(null);
-  const [isLoaded, setIsLoaded] = useState(false);
 
   const [items, setItems] = useState([]);
-  const [teams, setTeams] = useState([]);
+  
 
-
-  const [hideCompanies, setHideCompanies] = useState(true);
-
-
-  // Note: the empty deps array [] means
-  // this useEffect will run once
-  // similar to componentDidMount()
   useEffect(() => {
-    fetch(process.env.REACT_APP_API_COMPANIES)
-      .then(res => res.json())
-      .then(
-        (result) => {
-          setIsLoaded(true);
-          setItems(result.data);
-        },
-        // Nota: es importante manejar errores aquí y no en 
-        // un bloque catch() para que no interceptemos errores
-        // de errores reales en los componentes.
-        (error) => {
-          setIsLoaded(true);
-          setError(error);
-        }
-      )
+    document.body.style.backgroundColor = "lightblue"
+    getCompanies()
   }, [])
 
 
-  const trigger = (id) => {
-    setHideCompanies(!hideCompanies)
-    fetchTeams(id)
+  //API CALLS 
+  const getCompanies = async () => {
+    const data = await fetch(process.env.REACT_APP_API_COMPANIES)
+    const response = await data.json()
+    setItems(response.data)
   }
 
-  const fetchTeams = (id) => {
-    return fetch(process.env.REACT_APP_API_COMPANIES+id)
-      .then(res => res.json())
-      .then(
-        (result) => {
-          setTeams(result.data);
-        },
-        (error) => {
-          setError(error);
-        })
-  }
+  return (
 
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  } else if (!isLoaded) {
-    return <div>Loading...</div>;
-  } else {
-    return (
-
-      <div>
-        {hideCompanies &&
-
-          <Table className="ui striped table">
-            <thead>
-              <tr >
-                <th>Company Name</th>
-                <th>Sector</th>
-                <th>City </th>
-                <th>Teams</th>
+    <div>
+        <Table className="ui striped table">
+          <thead>
+            <tr >
+              <th>Company Name</th>
+              <th>Sector</th>
+              <th>City </th>
+              <th>Teams</th>
+            </tr>
+          </thead>
+          <tbody>{
+            items.map(item => (
+              <tr key={item.CompanyId} className="center aligned">
+                <td>{item.Name}</td>
+                <td>{item.Sector}</td>
+                <td>{item.City}</td>
+                <td>
+                  <Link to={`/companies/${item.CompanyId}`}>
+                    <i className="eye icon"></i>
+                  </Link>
+                </td>
               </tr>
-            </thead>
-            <tbody>{
-              items.map(item => (
-                <tr key={item.CompanyId} className="center aligned">
-                  <td>{item.Name}</td>
-                  <td>{item.Sector}</td>
-                  <td>{item.City}</td>
-                  <td>
-                    <button onClick={() => trigger(item.CompanyId)}>
-                      <i className="eye icon"></i>
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
-
-        }
-
-        {<div>
-          {<Teams teams={teams} />}
-        </div>}
-
-      </div>
-    )
-  }
+            ))}
+          </tbody>
+        </Table>
+    </div>
+  )
 }
 
