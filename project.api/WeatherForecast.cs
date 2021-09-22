@@ -1,6 +1,6 @@
 using System;
 
-namespace project.api
+namespace ITQ
 {
     public class WeatherForecast
     {
