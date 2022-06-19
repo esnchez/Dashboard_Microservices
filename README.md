@@ -1,9 +1,10 @@
 # ITQ full stack test
 
-.net API + react.js (original stack)
+.net API (C#) + react.js (original stack)
 and node.js (workaround solution)
 
+Folder structure
 
-js_backend folder relates to an API made in node.js, which is the version working for the full-stack test. 
-project.api is the .net API, which is not connected, nor finished for the final delivery. 
-project.frontend2 is a client using react.js framework
+**js_backend**: API made in node.js, which is the working version for the full-stack test application. 
+**project.api**: the .net API written in C#, not connected to client, nor finished for the final delivery. 
+**project.frontend2**: is a client using react.js framework
