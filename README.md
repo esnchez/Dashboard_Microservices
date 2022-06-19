@@ -1,4 +1,4 @@
-# ITQ full stack test
+# ITQ full stack application
 
 .net API (C#) + react.js (original stack)
 and node.js (workaround solution)
