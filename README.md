@@ -1,4 +1,4 @@
-# ITQ Dashboard (full stack application)
+# Test Dashboard (full stack application)
 
 node.js API + React.js client (original stack)
 and .NET (C#) API (in progress)
