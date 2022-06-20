@@ -1,6 +1,6 @@
 # ITQ Dashboard (full stack application)
 
-node.js API + react.js (original stack)
+node.js API + React.js client (original stack)
 and .NET (C#) API (in progress)
 
 Folder structure
