@@ -1,4 +1,4 @@
-# Simple Dashboard (Javascript/MySQL app)
+## Simple Dashboard (Javascript/MySQL app)
 
 This simple project is built and used mainly for testing purposes. 
 
