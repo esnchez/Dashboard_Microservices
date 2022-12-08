@@ -20,7 +20,9 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node App/router.js"
+    "start": "node App/router.js",
+    "start:development": "node App/router.js"
+
   },
   "author": "",
   "license": "ISC",

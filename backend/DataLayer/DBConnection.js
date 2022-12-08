@@ -13,6 +13,8 @@ const db = mysql.createConnection({
     database: process.env.DB_DATABASE //Name of the database
 });
 
+
+
 //THEN EXPORT THE DB CONNECTION
 module.exports = db;
 
