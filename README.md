@@ -1,7 +1,7 @@
-# Simple Dashboard (full stack application)
+# Simple Dashboard (Javascript/MySQL app)
 
-Folder structure
+This simple project is built and used mainly for testing purposes. 
 
-**js_backend**: API made with node.js express, which is the working server in the test application. 
+**Backend**: Simple API in node.js and express, which is using MySQL database as data persistence. 
 
-**project.frontend2**: client app using react.js library
+**Frontend**: Client app using react.js library
