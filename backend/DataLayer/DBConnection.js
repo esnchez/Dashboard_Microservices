@@ -1,5 +1,5 @@
 //FIRST REQUIRE THE MYSQL MODULE THAT WE HAVE INSTALLED JUST AT THE BEGGINING IT HAS TO BE INSIDE OF NODE-MODULES.
-const mysql = require('mysql');
+const mysql = require('mysql2');
 
 //require the .env file:
 require('dotenv').config()
