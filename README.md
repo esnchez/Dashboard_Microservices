@@ -9,13 +9,13 @@ This project is built and used for testing purpouses, mainly Docker compose and 
 **DB administrator/UI**: phpMyAdmin is exposed at port 8081 of our machine in order to visualize/manage MySQL through the browser. 
 
 
-# Run the system (after previous installation of Docker):
+### Run the system (after previous installation of Docker):
 
 ```
 docker compose up --build
 ```
 
-# Stop the system / Stop the system and remove all related containers and images created by docker compose:
+### Stop the system / Stop the system and remove all related containers and images created by docker compose:
 
 ```
 docker compose down
